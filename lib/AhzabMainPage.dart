@@ -8,7 +8,7 @@ import 'CustomSlider.dart';
 import 'package:connectivity/connectivity.dart';
 
 // ignore: must_be_immutable
-// Mainly used for AlBar and AlWazifa
+// Mainly used for AlBar and AlWazifa ( AlWazifa is recently removed )
 class AhzabWithAudio extends StatefulWidget {
   String title, audiolink, tooltip;
   double firstpage, lastpage;

@@ -61,7 +61,6 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
             if (s == AudioPlayerState.STOPPED) {
               widget._position = Duration(minutes: 0, seconds: 0);
               _playing = false;
-              debugPrint("done");
               widget._audioPlayer.stop();
             } else {}
           })

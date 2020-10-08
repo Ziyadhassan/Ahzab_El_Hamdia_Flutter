@@ -14,8 +14,9 @@ class AlGawhra extends StatefulWidget {
 }
 
 class _AlGawhraState extends State<AlGawhra> {
+
   String audiolink =
-      "https://dl.dropboxusercontent.com/s/ezsiwjsgksmd6r6/%D8%A7%D9%84%D8%AC%D9%88%D9%87%D8%B1%D8%A9%20%D8%A7%D9%84%D8%AD%D8%A7%D9%85%D8%AF%D9%8A%D8%A9%20%D8%A8%D8%B5%D9%88%D8%AA%20%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AD%D8%A7%D8%AC%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%85%D9%82%D8%B5%D9%88%D8%AF.m4a";
+      "https://dl.dropboxusercontent.com/s/gulsnlgwmbcxf6c/%D8%AC%D9%88%D9%87%D8%B1%D8%A9%20%D8%A7%D9%84%D8%AD%D8%A7%D9%85%D8%AF%D9%8A%D8%A9%20%D8%A8%D8%B5%D9%88%D8%AA%20%D8%AC%D9%85%D8%A7%D8%B9%D9%8A.mp3";
   double firstpage, lastpage;
   CarouselController _scrollController;
   double page;
@@ -37,7 +38,8 @@ class _AlGawhraState extends State<AlGawhra> {
     "lib/Images/AlGawhra/ng12.jpg",
     "lib/Images/AlGawhra/ng13.jpg"
   ];
-  List<Duration> durations = [
+  // The list of duration of the perivous sound ( sound of baba 7ag )
+  /*List<Duration> durations = [
     Duration(minutes: 0, seconds: 0), // Page 1 , 5
     Duration(minutes: 0, seconds: 41), // Page 2 , 6
     Duration(minutes: 1, seconds: 54), // Page 3 , 7
@@ -51,6 +53,21 @@ class _AlGawhraState extends State<AlGawhra> {
     Duration(minutes: 11, seconds: 9), // Page 11 , 15
     Duration(minutes: 12, seconds: 12), // Page 11 , 16
     Duration(minutes: 13, seconds: 27), // Page 11 , 17
+  ];*/
+  List<Duration> durations = [
+    Duration(minutes: 0, seconds: 27), // Page 1 , 5
+    Duration(minutes: 1, seconds: 4), // Page 2 , 6
+    Duration(minutes: 2, seconds: 9), // Page 3 , 7
+    Duration(minutes: 3, seconds: 13), // Page 4 , 8
+    Duration(minutes: 4, seconds: 21), // Page 5 , 9
+    Duration(minutes: 5, seconds: 28), // Page 6 , 10
+    Duration(minutes: 6, seconds: 34), // Page 7 , 11
+    Duration(minutes: 7, seconds: 39), // Page 8 , 12
+    Duration(minutes: 8, seconds: 34), // Page 9 , 13
+    Duration(minutes: 9, seconds: 30), // Page 10 , 14
+    Duration(minutes: 10, seconds: 27), // Page 11 , 15
+    Duration(minutes: 11, seconds: 21), // Page 11 , 16
+    Duration(minutes: 12, seconds: 11), // Page 11 , 17
   ];
   bool Night_Mode;
 
@@ -173,7 +190,7 @@ class _AlGawhraState extends State<AlGawhra> {
                   onPressed: () {
                     play();
                   },
-                  tooltip: "تشغيل القرائه بصوت الشيخ عبد المقصود الشاذلى"),
+                  tooltip: "تشغيل القرائه الجماعية"),
               secondChild: new Row(children: <Widget>[
                 new AnimatedCrossFade(
                   firstChild: new IconButton(

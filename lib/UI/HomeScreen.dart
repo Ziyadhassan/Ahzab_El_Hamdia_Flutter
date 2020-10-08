@@ -8,6 +8,7 @@ import 'Ahzab/All_Ahzab_for_import.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ahzab_el_hamdia/Constants.dart';
 import 'package:ahzab_el_hamdia/EnshadPlayerPages.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _pageSelected = 0;
+  int _pageSelected = 0 , EnshadIndex = 0;
   List<String> categories = ["أحزاب", "انشاد"];
   PageController _pageController = new PageController();
   bool Night_Mode;
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     read();
+    EnshadIndex = 0;
   }
 
   StaggeredGridView getAhzabPage() {
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       children: <Widget>[
         AhzabListFiller(context, "الورد الحامدي", Werd()),
-        AhzabListFiller(context, "الجوهره", AlGawhra()),
+        AhzabListFiller(context, "الجوهر", AlGawhra()),
         AhzabListFiller(context, "الوظيفة", AlWazifa()),
         AhzabListFiller(context, "حزب البر", AlBr()),
         AhzabListFiller(context, "حزب البحر", AlBhr()),
@@ -69,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  GestureDetector AhzabListFiller(BuildContext context, String text,
-      Widget page) {
+  GestureDetector AhzabListFiller(
+      BuildContext context, String text, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => page));
@@ -104,28 +106,24 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSpacing: 10,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       children: <Widget>[
-        EnshadListFiller(context, "سيدي سلامة يا روحي", 0),
-        EnshadListFiller(context, "شئ لله يا ابا حامد", 1),
-        EnshadListFiller(context, "شاذلى يا ابا الحسن", 2),
-        EnshadListFiller(context, "صفت اوقاتنا", 3),
-        EnshadListFiller(context, "فؤادي وجسمي وروحي لكم", 4),
-        EnshadListFiller(context, "قصيدة سلامة سلامة", 5),
-        EnshadListFiller(context, "هو مولانا", 6),
-        EnshadListFiller(context, "يا اسم غالى", 7),
+        EnshadListFiller(context, "شئ لله يا ابا حامد", 0),
+        EnshadListFiller(context, "شاذلى يا ابا الحسن", 1),
+        EnshadListFiller(context, "صفت اوقاتنا", 2),
+        EnshadListFiller(context, "فؤادي وجسمي وروحي لكم", 3),
+        EnshadListFiller(context, "قصيدة سلامة سلامة", 4),
+        EnshadListFiller(context, "هو مولانا", 5),
+        EnshadListFiller(context, "يا اسم غالى", 6),
+        EnshadListFiller(context, "يا سادة الحي", 7),
         EnshadListFiller(context, "يا قرة العيون يا سيدي سلامة", 8),
-        EnshadListFiller(context, "يا سادة الحي", 9),
-        EnshadListFiller(context, "يا حلو خالص", 10),
-        EnshadListFiller(context, "توسلت بالهادي الحبيب محمد", 11),
-        EnshadListFiller(context, "سيدي صالح نظرة الى الاحباب", 12),
-        EnshadListFiller(context, "اياما بالوفا", 13),
-        EnshadListFiller(context, "قسمآ بنور المصطفى و جماله", 14),
-        EnshadListFiller(context, "حب سادتنا سعادة", 15),
-        EnshadListFiller(context, "في حضرة تجلى", 16),
-        EnshadListFiller(context, "وحياة جمالك", 17),
+        EnshadListFiller(context, "يا حلو خالص", 9),
+        EnshadListFiller(context, "توسلت بالهادي الحبيب محمد",10),
+        EnshadListFiller(context, "اياما بالوفا", 11),
+        EnshadListFiller(context, "قسمآ بنور المصطفى و جماله", 12),
+        EnshadListFiller(context, "حب سادتنا سعادة", 13),
+        EnshadListFiller(context, "في حضرة تجلى", 14),
+        EnshadListFiller(context, "وحياة جمالك", 15),
       ],
       staggeredTiles: [
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
         StaggeredTile.extent(1, 75),
         StaggeredTile.extent(1, 75),
         StaggeredTile.extent(1, 75),
@@ -146,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  GestureDetector EnshadListFiller(BuildContext context, String text,
-      int index) {
+  GestureDetector EnshadListFiller(
+      BuildContext context, String text, int index) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -158,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: new Container(
         decoration: new BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/Black-islam-quran-ramdan-vector.png'),
+            image: AssetImage('assets/White-islam-quran-ramdan-vector.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -171,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
                 color:
-                Night_Mode ? Colors.white.withOpacity(0.9) : Colors.black),
+                    Night_Mode ? Colors.white.withOpacity(0.9) : Colors.black),
           ),
         ),
       ),
@@ -192,19 +190,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             centerTitle: true,
             backgroundColor: Night_Mode ? DarkModeBlack : Colors.white,
-//            actions: <Widget>[
-//              IconButton(
-//                icon: new Icon(
-//                  Icons.settings,
-//                  color: Night_Mode ? Colors.white : Colors.black,
-//                  size: 22,
-//                ),
-//                onPressed: () {
-//                  Navigator.push(context,
-//                      MaterialPageRoute(builder: (context) => Setting()));
-//                },
-//              ),
-//            ],
+/*            actions: <Widget>[
+              IconButton(
+                icon: new Icon(
+                  Icons.settings,
+                  color: Night_Mode ? Colors.white : Colors.black,
+                  size: 22,
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Setting()));
+                },
+              ),
+            ],*/
           ),
           body: Column(
             children: <Widget>[
@@ -218,10 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: new Column(
                       children: <Widget>[
                         new ButtonTheme(
-                          minWidth: MediaQuery
-                              .of(context)
-                              .size
-                              .width / 2 - 40,
+                          minWidth: MediaQuery.of(context).size.width / 2 - 40,
                           child: new RaisedButton(
                               child: new Text(
                                 "أحزاب",
@@ -249,17 +244,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Container(
                           height: 3,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width / 2 - 40,
+                          width: MediaQuery.of(context).size.width / 2 - 40,
                           color: Night_Mode
                               ? _pageSelected == 0
-                              ? Color.fromRGBO(20, 150, 90, 1)
-                              : Color.fromRGBO(20, 100, 90, 0.5)
+                                  ? Color.fromRGBO(20, 150, 90, 1)
+                                  : Color.fromRGBO(20, 100, 90, 0.5)
                               : _pageSelected == 0
-                              ? Color.fromRGBO(32, 96, 101, 1)
-                              : Color.fromRGBO(32, 96, 101, 0.6),
+                                  ? Color.fromRGBO(32, 96, 101, 1)
+                                  : Color.fromRGBO(32, 96, 101, 0.6),
                         ),
                       ],
                     ),
@@ -269,10 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: new Column(
                       children: <Widget>[
                         new ButtonTheme(
-                          minWidth: MediaQuery
-                              .of(context)
-                              .size
-                              .width / 2 - 40,
+                          minWidth: MediaQuery.of(context).size.width / 2 - 40,
                           child: new RaisedButton(
                               child: new Text(
                                 "أنشاد",
@@ -300,17 +289,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Container(
                           height: 3,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width / 2 - 40,
+                          width: MediaQuery.of(context).size.width / 2 - 40,
                           color: Night_Mode
                               ? _pageSelected == 1
-                              ? Color.fromRGBO(98, 71, 136, 1)
-                              : Color.fromRGBO(100, 71, 150, 0.5)
+                                  ? Color.fromRGBO(98, 71, 136, 1)
+                                  : Color.fromRGBO(100, 71, 150, 0.5)
                               : _pageSelected == 1
-                              ? Color.fromRGBO(155, 70, 180, 1)
-                              : Color.fromRGBO(155, 70, 180, 0.4),
+                                  ? Color.fromRGBO(155, 70, 180, 1)
+                                  : Color.fromRGBO(155, 70, 180, 0.4),
                         ),
                       ],
                     ),

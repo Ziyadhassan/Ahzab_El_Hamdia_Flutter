@@ -20,6 +20,7 @@ class _EnshadPlayerPagesState extends State<EnshadPlayerPages> {
   @override
   void initState() {
     super.initState();
+    index = 0;
     _pageController = PageController(initialPage: widget.index);
   }
 
@@ -29,14 +30,6 @@ class _EnshadPlayerPagesState extends State<EnshadPlayerPages> {
       controller: _pageController,
       scrollDirection: Axis.horizontal,
       children: <Widget>[
-        EnshadPlayer(
-            index: index++,
-            title: "سيدي سلامة يا روحي",
-            singer: "الأخوة ابو شعر",
-            audiolink:
-                "https://dl.dropboxusercontent.com/s/71o5372cw847ug5/%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B3%D9%84%D8%A7%D9%85%D9%87%20%D9%8A%D8%A7%20%D8%B1%D9%88%D8%AD%D9%8A%20%D9%8A%D8%A7%D9%82%D9%84%D8%A8%D9%8A%20%D9%8A%D8%A7%D8%B3%D9%86%D8%AF%D9%8A%20%D8%A7%D9%84%D8%A7%D8%AE%D9%88%D9%87%20%D8%A7%D8%A8%D9%88%20%D8%B4%D8%B9%D8%B1%20%D9%85%D9%88%D9%84%D8%AF%20%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B3%D9%84%D8%A7%D9%85%D9%87%D9%A2%D9%A0%D9%A1%D9%A9.m4a",
-            downloadLink:
-                "https://dl.dropboxusercontent.com/s/71o5372cw847ug5/%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B3%D9%84%D8%A7%D9%85%D9%87%20%D9%8A%D8%A7%20%D8%B1%D9%88%D8%AD%D9%8A%20%D9%8A%D8%A7%D9%82%D9%84%D8%A8%D9%8A%20%D9%8A%D8%A7%D8%B3%D9%86%D8%AF%D9%8A%20%D8%A7%D9%84%D8%A7%D8%AE%D9%88%D9%87%20%D8%A7%D8%A8%D9%88%20%D8%B4%D8%B9%D8%B1%20%D9%85%D9%88%D9%84%D8%AF%20%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B3%D9%84%D8%A7%D9%85%D9%87%D9%A2%D9%A0%D9%A1%D9%A9.m4a?dl=1"),
         EnshadPlayer(
           index: index++,
           title: "شئ لله يا ابا حامد",
@@ -135,15 +128,6 @@ class _EnshadPlayerPagesState extends State<EnshadPlayerPages> {
               "https://dl.dropboxusercontent.com/s/sren4t1fhzzonur/%D8%AA%D9%88%D8%B3%D9%84%D8%AA%20%D8%A8%D8%A7%D9%84%D9%87%D8%A7%D8%AF%D9%89%20%D8%A7%D9%84%D8%AD%D8%A8%D9%8A%D8%A8%20%D9%85%D8%AD%D9%85%D8%AF.mp3",
           downloadLink:
               "https://dl.dropboxusercontent.com/s/sren4t1fhzzonur/%D8%AA%D9%88%D8%B3%D9%84%D8%AA%20%D8%A8%D8%A7%D9%84%D9%87%D8%A7%D8%AF%D9%89%20%D8%A7%D9%84%D8%AD%D8%A8%D9%8A%D8%A8%20%D9%85%D8%AD%D9%85%D8%AF.mp3?dl=1",
-        ),
-        EnshadPlayer(
-          index: index++,
-          title: "سيدي صالح نظرة الى الاحباب",
-          singer: "الشيخ على خليفة",
-          audiolink:
-              "https://dl.dropboxusercontent.com/s/nf2wrjdtborwzmt/%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B5%D8%A7%D9%84%D8%AD%20%D9%86%D8%B8%D8%B1%D9%87%20%D8%A7%D9%84%D8%A7%D8%AD%D8%A8%D8%A7%D8%A8.mp3",
-          downloadLink:
-              "https://dl.dropboxusercontent.com/s/nf2wrjdtborwzmt/%D8%B3%D9%8A%D8%AF%D9%8A%20%D8%B5%D8%A7%D9%84%D8%AD%20%D9%86%D8%B8%D8%B1%D9%87%20%D8%A7%D9%84%D8%A7%D8%AD%D8%A8%D8%A7%D8%A8.mp3?dl=1",
         ),
         EnshadPlayer(
           index: index++,

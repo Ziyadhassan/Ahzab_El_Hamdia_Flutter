@@ -45,16 +45,13 @@ class _DuaaKhtmKuraanState extends State<DuaaKhtmKuraan> {
 
   @override
   Widget build(BuildContext context) {
-    return new AhzabWithAudio(
+    return new AhzabWithoutAudio(
       title: title,
-      firstpage: _firstpage,
-      lastpage: _lastpage,
-      audiolink: _audiolink,
       imagies: _imagies,
-      durations: durations,
-      tooltip: "تشغيل القرائه بصوت الشيخ على خليفه",
     );
   }
+}
+
 // Old UI [ Text ]
 //  @override
 //  Widget build(BuildContext context) {
@@ -108,4 +105,3 @@ class _DuaaKhtmKuraanState extends State<DuaaKhtmKuraan> {
 //    );
 //  }
 
-}

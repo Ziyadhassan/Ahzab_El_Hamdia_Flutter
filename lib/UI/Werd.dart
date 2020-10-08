@@ -5,9 +5,9 @@ import 'package:ahzab_el_hamdia/Dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
 import '../Constants.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class Werd extends StatefulWidget {
-  
   @override
   _WerdState createState() => _WerdState();
 }
@@ -90,11 +90,10 @@ class _WerdState extends State<Werd> {
         }
       }
 
-      if(counter == 99 && middletext == "لا اله الا الله")
-        {
-          middletext = "لا اله الا الله سيدنا محمد رسول الله صل الله عليه و على اله و صحبة و سلم";
-        }
-
+      if (counter == 99 && middletext == "لا اله الا الله") {
+        middletext =
+            "لا اله الا الله سيدنا محمد رسول الله صل الله عليه و على اله و صحبة و سلم";
+      }
     });
     _save();
   }
@@ -118,8 +117,10 @@ class _WerdState extends State<Werd> {
               style: new TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w300,
-                  color:Colors.white)),
-          backgroundColor: Night_Mode ? Color.fromRGBO(2, 46, 52, 0.7) : Color.fromRGBO(32, 96, 101, 1),
+                  color: Colors.white)),
+          backgroundColor: Night_Mode
+              ? Color.fromRGBO(2, 46, 52, 0.7)
+              : Color.fromRGBO(32, 96, 101, 1),
           centerTitle: true,
           actions: <Widget>[
             new AnimatedCrossFade(
@@ -138,9 +139,9 @@ class _WerdState extends State<Werd> {
         ),
         body: new Column(
           children: <Widget>[
-            new Container(
-                margin: EdgeInsets.only(top: 10),
-                alignment: Alignment.center,
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: new Text("${counter}",
                     style: new TextStyle(
                         fontSize:
@@ -148,41 +149,39 @@ class _WerdState extends State<Werd> {
                         fontWeight: FontWeight.w500,
                         color: (counter >= 90)
                             ? Colors.red
-                            : Night_Mode ? Colors.white : Colors.black))),
-            Expanded(
-              child: new Container(
-                alignment: Alignment.center,
-                child: new Text("${middletext}",
-                    textAlign: TextAlign.center,
-                    textDirection: TextDirection.rtl,
-                    style: new TextStyle(
-                        fontSize:
-                            MediaQuery.of(context).size.height > 600 ? 30 : 20,
-                        fontWeight: FontWeight.bold,
-                        color: Night_Mode ? Colors.white : Colors.black)),
+                            : Night_Mode ? Colors.white : Colors.black)),
               ),
             ),
-            new Container(
-                height: 148,
-                width: 300,
-                margin: EdgeInsets.only(bottom: 10),
-                alignment: Alignment.bottomCenter,
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                        alignment: Alignment.bottomCenter,
-                        image: new AssetImage("lib/Images/buttonwall.png"),
-                        fit: BoxFit.contain),
-                    color: Colors.transparent),
-                child: new ButtonTheme(
-                  minWidth: 300,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Center(
+                  child: new AutoSizeText("${middletext}",
+                      textAlign: TextAlign.justify,
+                      textDirection: TextDirection.rtl,
+                      style: new TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Night_Mode ? Colors.white : Colors.black)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: new GestureDetector(
+                onTap: () {
+                  _setCounter();
+                },
+                child: new Container(
                   height: 148,
-                  child: new RaisedButton(
-                    onPressed: () {
-                      _setCounter();
-                    },
-                    color: Colors.transparent,
-                  ),
-                ))
+                  width: 300,
+                  decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                          image: new AssetImage("lib/Images/buttonwall.png"),
+                          fit: BoxFit.contain)),
+                ),
+              ),
+            )
           ],
         ),
       ),
