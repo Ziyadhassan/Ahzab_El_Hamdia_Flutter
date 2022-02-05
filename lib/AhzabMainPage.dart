@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'Constants.dart';
 import 'CustomSlider.dart';
@@ -42,6 +43,7 @@ class _AhzabWithAudioState extends State<AhzabWithAudio> {
   @override
   void initState() {
     super.initState();
+    Wakelock.enable();
     _audioPlayer = new AudioPlayer();
     page = widget.firstpage;
     _indicator = true;
@@ -71,6 +73,7 @@ class _AhzabWithAudioState extends State<AhzabWithAudio> {
   @override
   void dispose() {
     // stop();
+    Wakelock.disable();
     _audioPlayer.stop();
     _audioPlayer.dispose();
     super.dispose();

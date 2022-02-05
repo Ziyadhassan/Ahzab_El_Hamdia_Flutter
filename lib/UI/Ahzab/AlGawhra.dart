@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '../../Constants.dart';
 import '../../Dialogs.dart';
@@ -75,6 +76,7 @@ class _AlGawhraState extends State<AlGawhra> {
   @override
   void initState() {
     super.initState();
+    Wakelock.enable();
     firstpage = 5;
     lastpage = 17;
     Night_Mode = false;
@@ -108,7 +110,7 @@ class _AlGawhraState extends State<AlGawhra> {
   void dispose() {
     // stop();
     _audioPlayer.stop();
-
+    Wakelock.disable();
     _audioPlayer.dispose();
     super.dispose();
   }
