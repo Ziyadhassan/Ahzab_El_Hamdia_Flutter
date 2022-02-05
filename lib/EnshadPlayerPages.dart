@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+
 import 'UI/EnshadPlayer.dart';
 
 class EnshadPlayerPages extends StatefulWidget {
   int index;
 
   EnshadPlayerPages({
-    @required this.index,
-    Key key,
-  }) : super(key: key);
+    required this.index,
+  });
 
   @override
   _EnshadPlayerPagesState createState() => _EnshadPlayerPagesState();
 }
 
 class _EnshadPlayerPagesState extends State<EnshadPlayerPages> {
-  PageController _pageController;
+  late PageController _pageController;
   int index = 0;
 
   @override
@@ -26,7 +26,7 @@ class _EnshadPlayerPagesState extends State<EnshadPlayerPages> {
 
   @override
   Widget build(BuildContext context) {
-    return new PageView(
+    return PageView(
       controller: _pageController,
       scrollDirection: Axis.horizontal,
       children: <Widget>[

@@ -9,7 +9,6 @@ List<Color> AhzabPageGreen = [
   Colors.lightGreen,
 ];
 
-
 Color DarkModeBlack = Color.fromRGBO(48, 48, 48, 1);
 
 int NumberOfEnshadPlayers = 16;

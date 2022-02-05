@@ -1,8 +1,9 @@
+import 'dart:core';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:ahzab_el_hamdia/CustomSlider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Constants.dart';
@@ -14,15 +15,14 @@ class AlGawhra extends StatefulWidget {
 }
 
 class _AlGawhraState extends State<AlGawhra> {
-
   String audiolink =
       "https://dl.dropboxusercontent.com/s/gulsnlgwmbcxf6c/%D8%AC%D9%88%D9%87%D8%B1%D8%A9%20%D8%A7%D9%84%D8%AD%D8%A7%D9%85%D8%AF%D9%8A%D8%A9%20%D8%A8%D8%B5%D9%88%D8%AA%20%D8%AC%D9%85%D8%A7%D8%B9%D9%8A.mp3";
-  double firstpage, lastpage;
-  CarouselController _scrollController;
-  double page;
-  AudioPlayer _audioPlayer;
-  bool _indicator;
-  bool _playing;
+  late double firstpage, lastpage;
+  CarouselController _scrollController = CarouselController();
+  late double page;
+  AudioPlayer _audioPlayer = AudioPlayer();
+  bool _indicator = true;
+  bool _playing = false;
   List<String> _images = [
     "lib/Images/AlGawhra/ng1.jpg",
     "lib/Images/AlGawhra/ng2.jpg",
@@ -38,6 +38,7 @@ class _AlGawhraState extends State<AlGawhra> {
     "lib/Images/AlGawhra/ng12.jpg",
     "lib/Images/AlGawhra/ng13.jpg"
   ];
+
   // The list of duration of the perivous sound ( sound of baba 7ag )
   /*List<Duration> durations = [
     Duration(minutes: 0, seconds: 0), // Page 1 , 5
@@ -69,17 +70,13 @@ class _AlGawhraState extends State<AlGawhra> {
     Duration(minutes: 11, seconds: 21), // Page 11 , 16
     Duration(minutes: 12, seconds: 11), // Page 11 , 17
   ];
-  bool Night_Mode;
+  bool Night_Mode = false;
 
   @override
   void initState() {
     super.initState();
     firstpage = 5;
     lastpage = 17;
-    _indicator = true;
-    _playing = false;
-    _scrollController = CarouselController();
-    _audioPlayer = AudioPlayer();
     Night_Mode = false;
 
     for (int i = 0; i < durations.length; i++) {
@@ -101,14 +98,17 @@ class _AlGawhraState extends State<AlGawhra> {
     read();
   }
 
-  void _animate() {
+  void _animate() async {
+    await _scrollController.onReady;
     _scrollController.animateToPage(7,
         duration: Duration(milliseconds: 2000), curve: Curves.linear);
   }
 
   @override
   void dispose() {
-    stop();
+    // stop();
+    _audioPlayer.stop();
+
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -181,52 +181,57 @@ class _AlGawhraState extends State<AlGawhra> {
           actions: <Widget>[
             new IconButton(
                 icon: new Icon(Icons.arrow_back), onPressed: _animate),
-            new AnimatedCrossFade(
-              duration: const Duration(milliseconds: 0),
-              firstChild: new IconButton(
-                  icon: new Icon(
-                    Icons.volume_up,
-                  ),
-                  onPressed: () {
-                    play();
-                  },
-                  tooltip: "تشغيل القرائه الجماعية"),
-              secondChild: new Row(children: <Widget>[
-                new AnimatedCrossFade(
-                  firstChild: new IconButton(
-                      icon: new Icon(Icons.pause),
-                      onPressed: () {
-                        pause();
-                      },
-                      iconSize: 30,
-                      tooltip: "توقف مؤقت"),
-                  secondChild: new IconButton(
-                      icon: new Icon(Icons.play_arrow),
-                      onPressed: () {
-                        pause();
-                      },
-                      iconSize: 30,
-                      tooltip: "تكملة التشغيل"),
-                  duration: const Duration(seconds: 0),
-                  crossFadeState: _playing
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                ),
-                new IconButton(
-                    icon: new Icon(Icons.stop),
+            _indicator
+                ? new IconButton(
+                    icon: new Icon(
+                      Icons.volume_up,
+                    ),
                     onPressed: () {
-                      stop();
+                      play();
                     },
-                    iconSize: 30,
-                    tooltip: "توقف"),
-              ]),
-              crossFadeState: _indicator
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-            )
+                    tooltip: "تشغيل القرائه الجماعية")
+                : new Row(children: <Widget>[
+                    _playing
+                        ? new IconButton(
+                            icon: new Icon(Icons.pause),
+                            onPressed: () {
+                              pause();
+                            },
+                            iconSize: 30,
+                            tooltip: "توقف مؤقت")
+                        : new IconButton(
+                            icon: new Icon(Icons.play_arrow),
+                            onPressed: () {
+                              pause();
+                            },
+                            iconSize: 30,
+                            tooltip: "تكملة التشغيل"),
+                    new IconButton(
+                        icon: new Icon(Icons.stop),
+                        onPressed: () {
+                          stop();
+                        },
+                        iconSize: 30,
+                        tooltip: "توقف"),
+                  ]),
           ],
         ),
-        body: new CustomSlider(images: _images, controller: _scrollController),
+        body: CarouselSlider(
+          carouselController: _scrollController,
+          options: CarouselOptions(
+            height: double.infinity,
+            viewportFraction: 1,
+            enableInfiniteScroll: false,
+            initialPage: 0,
+            reverse: true,
+            enlargeCenterPage: true,
+          ),
+          items: _images
+              .map(
+                (item) => new Image.asset(item, fit: BoxFit.contain),
+              )
+              .toList(),
+        ),
       ),
     );
   }

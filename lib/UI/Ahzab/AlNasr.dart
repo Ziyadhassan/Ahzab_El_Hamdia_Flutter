@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ahzab_el_hamdia/AhzabMainPage.dart';
+import 'package:flutter/material.dart';
 
 import '../../Dialogs.dart';
 
@@ -33,6 +33,7 @@ class _AlNasrState extends State<AlNasr> {
     super.initState();
     _showDialog();
   }
+
   _showDialog() async {
     await Future.delayed(Duration(milliseconds: 500));
     showDialog(

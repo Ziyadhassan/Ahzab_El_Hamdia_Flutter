@@ -1,25 +1,23 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io' show Platform;
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AhzabAudioDialog extends StatefulWidget {
   double firstpage;
   double lastpage;
 
   AhzabAudioDialog({
-    @required this.firstpage,
-    @required this.lastpage,
-    Key key,
-  }) : super(key: key);
+    required this.firstpage,
+    required this.lastpage,
+  });
 
   @override
   _AhzabAudioDialogState createState() => _AhzabAudioDialogState();
 }
 
 class _AhzabAudioDialogState extends State<AhzabAudioDialog> {
-  double page;
+  late double page;
 
   @override
   void initState() {
@@ -468,16 +466,15 @@ class NightMode extends StatefulWidget {
   bool Night_Mode;
 
   NightMode({
-    @required this.Night_Mode,
-    Key key,
-  }) : super(key: key);
+    required this.Night_Mode,
+  });
 
   @override
   _NightModeState createState() => _NightModeState();
 }
 
 class _NightModeState extends State<NightMode> {
-  String text;
+  late String text;
 
   @override
   void initState() {
@@ -548,10 +545,9 @@ class GeneralDialogs extends StatefulWidget {
   String title, content;
 
   GeneralDialogs({
-    @required this.title,
-    @required this.content,
-    Key key,
-  }) : super(key: key);
+    required this.title,
+    required this.content,
+  });
 
   @override
   _GeneralDialogsState createState() => _GeneralDialogsState();
@@ -622,97 +618,97 @@ class _GeneralDialogsState extends State<GeneralDialogs> {
   }
 }
 
-class NotificationsDialog extends StatefulWidget {
-  @override
-  _NotificationsDialogState createState() => _NotificationsDialogState();
-}
-
-class _NotificationsDialogState extends State<NotificationsDialog> {
-  Time time;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
- /* _dialog() {
-    if (Platform.isAndroid) {
-      return new AlertDialog(
-          title: new Text("اختر الميعاد",
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
-              )),
-          content: new TimePickerSpinner(
-            isShowSeconds: false,
-            is24HourMode: false,
-            normalTextStyle: TextStyle(fontSize: 24, color: Colors.black),
-            highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.blue),
-            spacing: 50,
-            itemHeight: 80,
-            isForce2Digits: false,
-            onTimeChange: (Times) {
-              setState(() {
-                time = Times as Time;
-                print(Times);
-                print(time);
-              });
-            },
-          ),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text("موافق",
-                    style: new TextStyle(color: Colors.lightBlue)),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context, time);
-                  });
-                })
-          ]);
-    } else {
-      return new CupertinoAlertDialog(
-          title: new Text("اختر الميعاد",
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
-              )),
-          content: new TimePickerSpinner(
-            is24HourMode: false,
-            normalTextStyle: TextStyle(fontSize: 24, color: Colors.deepOrange),
-            highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.yellow),
-            spacing: 50,
-            itemHeight: 80,
-            isForce2Digits: true,
-            onTimeChange: (Times) {
-              setState(() {
-                time = Times as Time;
-              });
-            },
-          ),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text("موافق",
-                    style: new TextStyle(color: Colors.lightBlue)),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context, time);
-                  });
-                })
-          ]);
-    }
-  }*/
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+// class NotificationsDialog extends StatefulWidget {
+//   @override
+//   _NotificationsDialogState createState() => _NotificationsDialogState();
+// }
+//
+// class _NotificationsDialogState extends State<NotificationsDialog> {
+//   late Time time;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//   }
+//
+//  /* _dialog() {
+//     if (Platform.isAndroid) {
+//       return new AlertDialog(
+//           title: new Text("اختر الميعاد",
+//               textAlign: TextAlign.right,
+//               textDirection: TextDirection.rtl,
+//               style: new TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 color: Colors.blueAccent,
+//               )),
+//           content: new TimePickerSpinner(
+//             isShowSeconds: false,
+//             is24HourMode: false,
+//             normalTextStyle: TextStyle(fontSize: 24, color: Colors.black),
+//             highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.blue),
+//             spacing: 50,
+//             itemHeight: 80,
+//             isForce2Digits: false,
+//             onTimeChange: (Times) {
+//               setState(() {
+//                 time = Times as Time;
+//                 print(Times);
+//                 print(time);
+//               });
+//             },
+//           ),
+//           actions: <Widget>[
+//             new FlatButton(
+//                 child: new Text("موافق",
+//                     style: new TextStyle(color: Colors.lightBlue)),
+//                 onPressed: () {
+//                   setState(() {
+//                     Navigator.pop(context, time);
+//                   });
+//                 })
+//           ]);
+//     } else {
+//       return new CupertinoAlertDialog(
+//           title: new Text("اختر الميعاد",
+//               textAlign: TextAlign.right,
+//               textDirection: TextDirection.rtl,
+//               style: new TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 color: Colors.blueAccent,
+//               )),
+//           content: new TimePickerSpinner(
+//             is24HourMode: false,
+//             normalTextStyle: TextStyle(fontSize: 24, color: Colors.deepOrange),
+//             highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.yellow),
+//             spacing: 50,
+//             itemHeight: 80,
+//             isForce2Digits: true,
+//             onTimeChange: (Times) {
+//               setState(() {
+//                 time = Times as Time;
+//               });
+//             },
+//           ),
+//           actions: <Widget>[
+//             new FlatButton(
+//                 child: new Text("موافق",
+//                     style: new TextStyle(color: Colors.lightBlue)),
+//                 onPressed: () {
+//                   setState(() {
+//                     Navigator.pop(context, time);
+//                   });
+//                 })
+//           ]);
+//     }
+//   }*/
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ahzab_el_hamdia/AhzabMainPage.dart';
+import 'package:flutter/material.dart';
 
 class AlWazifa extends StatefulWidget {
   @override
@@ -25,6 +25,7 @@ class _AlWazifaState extends State<AlWazifa> {
     "lib/Images/AlWazifa/nw10.png",
     "lib/Images/AlWazifa/nw11.png",
   ];
+
   // The list of duration of the perivous sound ( sound of baba 7ag )
   /*List<Duration> durations = [
     Duration(minutes: 0, seconds: 0), // Page 1 , 55
@@ -66,7 +67,7 @@ class _AlWazifaState extends State<AlWazifa> {
       firstpage: _firstpage,
       lastpage: _lastpage,
       audiolink: _audiolink,
-      imagies: _imagies,
+      images: _imagies,
       durations: durations,
       tooltip: "تشغيل القرائه الجماعية",
     );

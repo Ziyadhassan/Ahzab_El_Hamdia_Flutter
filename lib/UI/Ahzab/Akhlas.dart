@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:ahzab_el_hamdia/CustomSlider.dart';
 import 'package:ahzab_el_hamdia/AhzabMainPage.dart';
-
-import '../../Archive.dart';
-import '../HomeScreen.dart';
+import 'package:flutter/material.dart';
 
 class Akhlas extends StatefulWidget {
   @override

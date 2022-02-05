@@ -1,7 +1,7 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,23 +14,22 @@ class EnshadPlayer extends StatefulWidget {
   int index;
   Duration _duration = Duration();
   Duration _position = Duration();
-  AudioPlayer _audioPlayer;
+  late AudioPlayer _audioPlayer;
 
   EnshadPlayer({
-    @required this.title,
-    @required this.singer,
-    @required this.audiolink,
-    @required this.downloadLink,
-    @required this.index,
-    Key key,
-  }) : super(key: key);
+    required this.title,
+    required this.singer,
+    required this.audiolink,
+    required this.downloadLink,
+    required this.index,
+  });
 
   @override
   _EnshadPlayerState createState() => _EnshadPlayerState();
 }
 
 class _EnshadPlayerState extends State<EnshadPlayer> {
-  bool Night_Mode, _playing;
+  late bool Night_Mode, _playing;
 
   @override
   void initState() {
@@ -40,13 +39,14 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
     read();
     widget._audioPlayer = AudioPlayer(playerId: "Enshad${widget.index}");
 
-    widget._audioPlayer.durationHandler = (d) => setState(() {
-          widget._duration = d;
-        });
+     widget._audioPlayer.onDurationChanged.listen((event) {
+       setState(() =>  widget._duration = event);
+    });
 
-    widget._audioPlayer.positionHandler = (p) => setState(() {
-          widget._position = p;
-        });
+    widget._audioPlayer.onAudioPositionChanged.listen((event) {
+      setState(() => widget._position = event);
+    });
+
 
     widget._audioPlayer.onPlayerCompletion.listen((event) {
       setState(() {
@@ -55,16 +55,6 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
         _playing = false;
       });
     });
-
-    widget._audioPlayer.onPlayerStateChanged.listen((AudioPlayerState s) => {
-          setState(() {
-            if (s == AudioPlayerState.STOPPED) {
-              widget._position = Duration(minutes: 0, seconds: 0);
-              _playing = false;
-              widget._audioPlayer.stop();
-            } else {}
-          })
-        });
   }
 
   @override
@@ -81,21 +71,24 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
           context: context, builder: (context) => AudioWifiErrorDialog());
     } else if (connectivityResult == ConnectivityResult.wifi ||
         connectivityResult == ConnectivityResult.mobile) {
-      if (await canLaunch(widget.downloadLink)) {
-        await launch(widget.downloadLink);
-      } else {
-        showDialog(
-            context: context,
-            builder: (context) => GeneralDialogs(
-                title: "حدث خطأ اثناء التنزيل",
-                content: "الرجاء المحاولة مرة اخري"));
-      }
+      // canLaunch gives false, idk y
+      await launch(widget.downloadLink);
+
+      // if (await canLaunch(widget.downloadLink)) {
+      //   await launch(widget.downloadLink);
+      // } else {
+      //   showDialog(
+      //       context: context,
+      //       builder: (context) => GeneralDialogs(
+      //           title: "حدث خطأ اثناء التنزيل",
+      //           content: "الرجاء المحاولة مرة اخري"));
+      // }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return new SafeArea(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: Night_Mode ? DarkModeBlack : Colors.white,
         appBar: new AppBar(
@@ -235,65 +228,63 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
                     ),
                   ),
                 ),
-                new AnimatedCrossFade(
-                    firstChild: new ClipOval(
-                      child: Material(
-                        color: Night_Mode
-                            ? Color.fromRGBO(98, 71, 136, 0.9)
-                            : Color.fromRGBO(155, 81, 148, 1), // button color
-                        child: InkWell(
-                          splashColor: Color.fromRGBO(100, 73, 137, 1),
-                          // inkwell color
-                          child: SizedBox(
-                              width: 70,
-                              height: 70,
-                              child: new Center(
-                                child: Icon(
-                                  Icons.play_arrow,
-                                  size: 45,
-                                  color:
-                                      Night_Mode ? Colors.black : Colors.white,
-                                ),
-                              )),
-                          onTap: () {
-                            setState(() {
-                              play();
-                            });
-                          },
+                _playing
+                    ? ClipOval(
+                        child: Material(
+                          color: Night_Mode
+                              ? Color.fromRGBO(98, 71, 136, 0.9)
+                              : Color.fromRGBO(155, 81, 148, 1), // button color
+                          child: InkWell(
+                            splashColor: Color.fromRGBO(100, 73, 137, 1),
+                            // inkwell color
+                            child: SizedBox(
+                                width: 70,
+                                height: 70,
+                                child: new Center(
+                                  child: Icon(
+                                    Icons.pause,
+                                    size: 45,
+                                    color: Night_Mode
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                )),
+                            onTap: () {
+                              setState(() {
+                                pause();
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    : ClipOval(
+                        child: Material(
+                          color: Night_Mode
+                              ? Color.fromRGBO(98, 71, 136, 0.9)
+                              : Color.fromRGBO(155, 81, 148, 1), // button color
+                          child: InkWell(
+                            splashColor: Color.fromRGBO(100, 73, 137, 1),
+                            // inkwell color
+                            child: SizedBox(
+                                width: 70,
+                                height: 70,
+                                child: new Center(
+                                  child: Icon(
+                                    Icons.play_arrow,
+                                    size: 45,
+                                    color: Night_Mode
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                )),
+                            onTap: () {
+                              setState(() {
+                                play();
+                              });
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    secondChild: new ClipOval(
-                      child: Material(
-                        color: Night_Mode
-                            ? Color.fromRGBO(98, 71, 136, 0.9)
-                            : Color.fromRGBO(155, 81, 148, 1), // button color
-                        child: InkWell(
-                          splashColor: Color.fromRGBO(100, 73, 137, 1),
-                          // inkwell color
-                          child: SizedBox(
-                              width: 70,
-                              height: 70,
-                              child: new Center(
-                                child: Icon(
-                                  Icons.pause,
-                                  size: 45,
-                                  color:
-                                      Night_Mode ? Colors.black : Colors.white,
-                                ),
-                              )),
-                          onTap: () {
-                            setState(() {
-                              pause();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    crossFadeState: _playing
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    duration: Duration(seconds: 0)),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: new ClipOval(
@@ -345,28 +336,33 @@ class _EnshadPlayerState extends State<EnshadPlayer> {
           context: context, builder: (context) => AudioWifiErrorDialog());
     } else if (connectivityResult == ConnectivityResult.wifi ||
         connectivityResult == ConnectivityResult.mobile) {
-      stopAll();
-      int result =
-          await widget._audioPlayer.play(widget.audiolink, stayAwake: true);
-      if (result == 1) {
-        setState(() {
-          widget._audioPlayer.seek(widget._position);
-          _playing = true;
-        });
-      } else {
-        showDialog(context: context, builder: (context) => AudioErrorDialog());
+      if (widget._audioPlayer.state == PlayerState.PAUSED)
+        pause();
+      else {
+        stopAll();
+        int result =
+            await widget._audioPlayer.play(widget.audiolink, stayAwake: true);
+        if (result == 1) {
+          setState(() {
+            widget._audioPlayer.seek(widget._position);
+            _playing = true;
+          });
+        } else {
+          showDialog(
+              context: context, builder: (context) => AudioErrorDialog());
+        }
       }
     }
   }
 
   void pause() {
     setState(() {
-      if (widget._audioPlayer.state == AudioPlayerState.PLAYING) {
+      if (widget._audioPlayer.state == PlayerState.PLAYING) {
         setState(() {
           _playing = false;
           widget._audioPlayer.pause();
         });
-      } else if (widget._audioPlayer.state == AudioPlayerState.PAUSED) {
+      } else if (widget._audioPlayer.state == PlayerState.PAUSED) {
         setState(() {
           _playing = true;
           widget._audioPlayer.resume();

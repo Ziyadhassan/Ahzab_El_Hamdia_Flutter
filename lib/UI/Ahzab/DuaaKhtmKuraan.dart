@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../AhzabMainPage.dart';
 
 class DuaaKhtmKuraan extends StatefulWidget {
@@ -104,4 +105,3 @@ class _DuaaKhtmKuraanState extends State<DuaaKhtmKuraan> {
 //      ),
 //    );
 //  }
-

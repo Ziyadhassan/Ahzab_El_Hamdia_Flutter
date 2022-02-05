@@ -1,6 +1,7 @@
 import 'package:ahzab_el_hamdia/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'HomeScreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -8,7 +9,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool Night_Mode;
+  late bool Night_Mode;
 
   @override
   void initState() {

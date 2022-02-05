@@ -1,7 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/material.dart';
 import 'package:ahzab_el_hamdia/AhzabMainPage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
 
 class AlBr extends StatefulWidget {
   @override
@@ -76,7 +74,7 @@ class _AlBrState extends State<AlBr> {
       firstpage: _firstpage,
       lastpage: _lastpage,
       audiolink: _audiolink,
-      imagies: _imagies,
+      images: _imagies,
       durations: durations,
       tooltip: "تشغيل القرائه بصوت الشيخ على خليفه",
     );

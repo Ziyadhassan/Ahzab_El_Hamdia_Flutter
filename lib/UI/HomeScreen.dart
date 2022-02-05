@@ -1,14 +1,13 @@
-import 'package:ahzab_el_hamdia/UI/Ahzab/DuaaKhtmKuraan.dart';
-import 'package:ahzab_el_hamdia/UI/Setting.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'Werd.dart';
-import 'Ahzab/All_Ahzab_for_import.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ahzab_el_hamdia/Constants.dart';
 import 'package:ahzab_el_hamdia/EnshadPlayerPages.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ahzab_el_hamdia/UI/Ahzab/DuaaKhtmKuraan.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Ahzab/All_Ahzab_for_import.dart';
+import 'Werd.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,10 +15,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _pageSelected = 0 , EnshadIndex = 0;
+  int _pageSelected = 0, EnshadIndex = 0;
   List<String> categories = ["أحزاب", "انشاد"];
   PageController _pageController = new PageController();
-  bool Night_Mode;
+  bool Night_Mode = false;
 
   @override
   void initState() {
@@ -28,46 +27,76 @@ class _HomeScreenState extends State<HomeScreen> {
     EnshadIndex = 0;
   }
 
-  StaggeredGridView getAhzabPage() {
-    return new StaggeredGridView.count(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      crossAxisCount: 1,
-      crossAxisSpacing: 15,
-      mainAxisSpacing: 10,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      children: <Widget>[
-        AhzabListFiller(context, "الورد الحامدي", Werd()),
-        AhzabListFiller(context, "الجوهرة", AlGawhra()),
-        AhzabListFiller(context, "الوظيفة", AlWazifa()),
-        AhzabListFiller(context, "حزب البر", AlBr()),
-        AhzabListFiller(context, "حزب البحر", AlBhr()),
-        AhzabListFiller(context, "حزب اللطف", AlLtf()),
-        AhzabListFiller(context, "حزب الفلاح", AlFlah()),
-        AhzabListFiller(context, "حزب التوبة", AlTawba()),
-        AhzabListFiller(context, "حزب الاخلاص", Akhlas()),
-        AhzabListFiller(context, "حزب تفريج الكروب", Tafreg()),
-        AhzabListFiller(context, "حزب النصر", AlNasr()),
-        AhzabListFiller(context, "حزب الشكوى", AlShakwa()),
-        AhzabListFiller(context, "مناجاة", Mnagah()),
-        AhzabListFiller(context, "دعاء ختم القرآن", DuaaKhtmKuraan()),
-      ],
-      staggeredTiles: [
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-      ],
+  Widget getAhzabPage() {
+    return SingleChildScrollView(
+      child: new StaggeredGrid.count(
+        // scrollDirection: Axis.vertical,
+        // shrinkWrap: true,
+        // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        axisDirection: AxisDirection.down,
+        crossAxisCount: 1,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 10,
+        children: <Widget>[
+          SizedBox(
+            child: AhzabListFiller(context, "الورد الحامدي", Werd()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "الجوهرة", AlGawhra()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "الوظيفة", AlWazifa()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب البر", AlBr()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب البحر", AlBhr()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب اللطف", AlLtf()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب الفلاح", AlFlah()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب التوبة", AlTawba()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب الاخلاص", Akhlas()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب تفريج الكروب", Tafreg()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب النصر", AlNasr()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "حزب الشكوى", AlShakwa()),
+            height: 75,
+          ),
+          SizedBox(
+            child: AhzabListFiller(context, "مناجاة", Mnagah()),
+            height: 75,
+          ),
+          SizedBox(
+            child:
+                AhzabListFiller(context, "دعاء ختم القرآن", DuaaKhtmKuraan()),
+            height: 75,
+          ),
+        ],
+      ),
     );
   }
 
@@ -99,48 +128,80 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  StaggeredGridView getEnshadPage() {
-    return new StaggeredGridView.count(
-      crossAxisCount: 1,
-      crossAxisSpacing: 15,
-      mainAxisSpacing: 10,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      children: <Widget>[
-        EnshadListFiller(context, "شئ لله يا ابا حامد", 0),
-        EnshadListFiller(context, "شاذلى يا ابا الحسن", 1),
-        EnshadListFiller(context, "صفت اوقاتنا", 2),
-        EnshadListFiller(context, "فؤادي وجسمي وروحي لكم", 3),
-        EnshadListFiller(context, "قصيدة سلامة سلامة", 4),
-        EnshadListFiller(context, "هو مولانا", 5),
-        EnshadListFiller(context, "يا اسم غالى", 6),
-        EnshadListFiller(context, "يا قرة العيون يا سيدي سلامة", 7),
-        EnshadListFiller(context, "يا سادة الحي", 8),
-        EnshadListFiller(context, "يا حلو خالص", 9),
-        EnshadListFiller(context, "توسلت بالهادي الحبيب محمد",10),
-        EnshadListFiller(context, "اياما بالوفا", 11),
-        EnshadListFiller(context, "قسمآ بنور المصطفى و جماله", 12),
-        EnshadListFiller(context, "حب سادتنا سعادة", 13),
-        EnshadListFiller(context, "في حضرة تجلى", 14),
-        EnshadListFiller(context, "وحياة جمالك", 15),
-      ],
-      staggeredTiles: [
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-        StaggeredTile.extent(1, 75),
-      ],
+  Widget getEnshadPage() {
+    return SingleChildScrollView(
+      child: new StaggeredGrid.count(
+        crossAxisCount: 1,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 10,
+        axisDirection: AxisDirection.down,
+        children: <Widget>[
+          SizedBox(
+            child: EnshadListFiller(context, "شئ لله يا ابا حامد", 0),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "شاذلى يا ابا الحسن", 1),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "صفت اوقاتنا", 2),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "فؤادي وجسمي وروحي لكم", 3),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "قصيدة سلامة سلامة", 4),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "هو مولانا", 5),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "يا اسم غالى", 6),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "يا قرة العيون يا سيدي سلامة", 7),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "يا سادة الحي", 8),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "يا حلو خالص", 9),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "توسلت بالهادي الحبيب محمد", 10),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "اياما بالوفا", 11),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "قسمآ بنور المصطفى و جماله", 12),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "حب سادتنا سعادة", 13),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "في حضرة تجلى", 14),
+            height: 75,
+          ),
+          SizedBox(
+            child: EnshadListFiller(context, "وحياة جمالك", 15),
+            height: 75,
+          ),
+        ],
+      ),
     );
   }
 

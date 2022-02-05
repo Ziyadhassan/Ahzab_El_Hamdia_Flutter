@@ -1,42 +1,43 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Constants.dart';
-import 'Dialogs.dart';
-import 'CustomSlider.dart';
-import 'package:connectivity/connectivity.dart';
 
-// ignore: must_be_immutable
+import 'Constants.dart';
+import 'CustomSlider.dart';
+import 'Dialogs.dart';
+
 // Mainly used for AlBar and AlWazifa ( AlWazifa is recently removed )
+// ignore: must_be_immutable
 class AhzabWithAudio extends StatefulWidget {
   String title, audiolink, tooltip;
   double firstpage, lastpage;
-  List<String> imagies;
+  List<String> images;
   List<Duration> durations;
 
   AhzabWithAudio({
-    @required this.title,
-    @required this.firstpage,
-    @required this.lastpage,
-    @required this.audiolink,
-    @required this.imagies,
-    @required this.durations,
-    @required this.tooltip,
-    Key key,
-  }) : super(key: key);
+    required this.title,
+    required this.firstpage,
+    required this.lastpage,
+    required this.audiolink,
+    required this.images,
+    required this.durations,
+    required this.tooltip,
+  });
 
   @override
   _AhzabWithAudioState createState() => _AhzabWithAudioState();
 }
 
 class _AhzabWithAudioState extends State<AhzabWithAudio> {
-  double page;
-  AudioPlayer _audioPlayer;
-  bool _indicator;
-  bool _playing;
-  CarouselController controller;
-  bool Night_Mode;
+  late double page;
+  late AudioPlayer _audioPlayer;
+  late bool _indicator;
+  late bool _playing;
+  late CarouselController controller;
+  bool Night_Mode = false;
 
   @override
   void initState() {
@@ -69,7 +70,8 @@ class _AhzabWithAudioState extends State<AhzabWithAudio> {
 
   @override
   void dispose() {
-    stop();
+    // stop();
+    _audioPlayer.stop();
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -184,7 +186,22 @@ class _AhzabWithAudioState extends State<AhzabWithAudio> {
             )
           ],
         ),
-        body: new CustomSlider(images: widget.imagies, controller: controller),
+        body: CarouselSlider(
+          carouselController: controller,
+          options: CarouselOptions(
+            height: double.infinity,
+            viewportFraction: 1,
+            enableInfiniteScroll: false,
+            initialPage: 0,
+            reverse: true,
+            enlargeCenterPage: true,
+          ),
+          items: widget.images
+              .map(
+                (item) => new Image.asset(item, fit: BoxFit.contain),
+          )
+              .toList(),
+        ),
       ),
     );
   }
@@ -203,17 +220,16 @@ class AhzabWithoutAudio extends StatefulWidget {
   List<String> imagies;
 
   AhzabWithoutAudio({
-    @required this.title,
-    @required this.imagies,
-    Key key,
-  }) : super(key: key);
+    required this.title,
+    required this.imagies,
+  });
 
   @override
   _AhzabWithoutAudioState createState() => _AhzabWithoutAudioState();
 }
 
 class _AhzabWithoutAudioState extends State<AhzabWithoutAudio> {
-  bool Night_Mode;
+  bool Night_Mode = false;
 
   @override
   void initState() {
@@ -241,7 +257,10 @@ class _AhzabWithoutAudioState extends State<AhzabWithoutAudio> {
               : Color.fromRGBO(32, 96, 101, 1),
           centerTitle: true,
         ),
-        body: new CustomSlider(images: widget.imagies),
+        body: new CustomSlider(
+          images: widget.imagies,
+          controller: null,
+        ),
       ),
     );
   }

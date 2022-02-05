@@ -1,6 +1,7 @@
 import 'package:ahzab_el_hamdia/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'HomeScreen.dart';
 
 class SecondSplashScreen extends StatefulWidget {
@@ -8,7 +9,7 @@ class SecondSplashScreen extends StatefulWidget {
 }
 
 class _SecondSplashScreenState extends State<SecondSplashScreen> {
-  bool Night_Mode;
+  late bool Night_Mode;
   bool dump = false;
 
   @override
@@ -48,7 +49,9 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
               ),
-              secondChild: Image.asset("lib/Images/app_icon.png",),
+              secondChild: Image.asset(
+                "lib/Images/app_icon.png",
+              ),
               alignment: Alignment.center,
               firstCurve: Curves.easeInOutBack,
               secondCurve: Curves.easeInOutBack,

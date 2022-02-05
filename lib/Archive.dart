@@ -2,7 +2,6 @@ import 'package:ahzab_el_hamdia/UI/Werd.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:video_player/video_player.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -15,66 +14,62 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
+    return new Column(children: <Widget>[
+      new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          new Column(
             children: <Widget>[
-              new Column(
-                children: <Widget>[
-                  new RaisedButton(
-                    onPressed: () {},
-                    child: new Text("أحزاب",
-                        textDirection: TextDirection.rtl,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black87)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 3),
-                    height: 3,
-                    width: 50,
-                    color: Colors.black12,
-                  ),
-                ],
+              new RaisedButton(
+                onPressed: () {},
+                child: new Text("أحزاب",
+                    textDirection: TextDirection.rtl,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.w300, color: Colors.black87)),
               ),
-              new Column(
-                children: <Widget>[
-                  new RaisedButton(
-                    color: Colors.white54,
-                    onPressed: () {},
-                    child: new Text("انشاد",
-                        textDirection: TextDirection.rtl,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black87)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 3),
-                    height: 3,
-                    width: 50,
-                    color: Colors.black12,
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.only(top: 3),
+                height: 3,
+                width: 50,
+                color: Colors.black12,
               ),
             ],
           ),
-          new StaggeredGridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 10,
+          new Column(
             children: <Widget>[
-              new RaisedButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Werd()));
-              },
-                child: new Text("الورد الحامدي"),
-              )
+              new RaisedButton(
+                color: Colors.white54,
+                onPressed: () {},
+                child: new Text("انشاد",
+                    textDirection: TextDirection.rtl,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.w300, color: Colors.black87)),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 3),
+                height: 3,
+                width: 50,
+                color: Colors.black12,
+              ),
             ],
           ),
-        ]);
+        ],
+      ),
+      StaggeredGrid.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 10,
+        children: <Widget>[
+          new RaisedButton(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Werd()));
+            },
+            child: new Text("الورد الحامدي"),
+          )
+        ],
+      ),
+    ]);
   }
 }
 
@@ -338,7 +333,6 @@ class _videoState extends State<video> {
   }
 }
 */
-
 
 /*
 child: new RaisedButton(

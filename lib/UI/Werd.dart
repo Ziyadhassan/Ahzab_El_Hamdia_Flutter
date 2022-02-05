@@ -1,11 +1,12 @@
+import 'package:ahzab_el_hamdia/Dialogs.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:ahzab_el_hamdia/Dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
+
 import '../Constants.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class Werd extends StatefulWidget {
   @override
@@ -13,11 +14,11 @@ class Werd extends StatefulWidget {
 }
 
 class _WerdState extends State<Werd> {
-  AudioCache _audioCache;
-  bool Night_Mode;
-  int counter;
-  String middletext;
-  bool indicator;
+  late AudioCache _audioCache;
+  bool Night_Mode = false;
+  int counter = 0;
+  String middletext = "أستغفر الله العظيم";
+  bool indicator = false;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _WerdState extends State<Werd> {
     });
 
     if (indicator == true) {
-      bool _res = await showDialog<bool>(
+      bool? _res = await showDialog<bool>(
           context: context, builder: (context) => WerdOnStart());
 
       if (_res == false) {
@@ -149,7 +150,9 @@ class _WerdState extends State<Werd> {
                         fontWeight: FontWeight.w500,
                         color: (counter >= 90)
                             ? Colors.red
-                            : Night_Mode ? Colors.white : Colors.black)),
+                            : Night_Mode
+                                ? Colors.white
+                                : Colors.black)),
               ),
             ),
             Expanded(
